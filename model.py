@@ -49,8 +49,36 @@ class User(db.Model):
 
         return True           
 
+    def is_anonymous(self):
+        """If user is anonymous, return true."""
+        return False          
 
-        return(self.user_id) 
+    def update_email(self, email):
+        """Update user email."""
+
+        self.email = email
+
+    def update_first_name(self, user_fname):
+        """Update user first name."""
+
+        self.user_fname = user_fname
+
+    def update_last_name(self, user_lname):
+        """Update user last night."""
+
+        self.user_lname = user_lname
+
+    def update_password(self, password):
+        """Update user password."""
+        
+        self.password = password
+
+
+    def get_id(self):
+        """Return ID that uniquely identifies user."""
+
+        return(self.user_id)
+     
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
 

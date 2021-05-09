@@ -25,6 +25,11 @@ def create_image(user_id, image_name, tag1, tag2, tag3):
 
     return image
 
+def get_user_by_username(username): #hiking_object.user_id
+    """Return a user object given a user id."""
+
+    return User.query.filter_by(username=username).first()
+
 # Profile Edit Functions
 def update_user_profile_info(user_id, user_fname, user_lname, email):
     """Update basic user profile information."""
@@ -68,10 +73,10 @@ def update_password(user_id, old_password, new_password):
     # flash('Successful password change.')
     return True
 
-def update_friend_list(friend_user_id):
+def update_friend_list(unfriend_id):
     """Delete a friend."""
 
-    User_friend.query.filter_by(user_)
+    db.session.delete(unfriend_id)
 
     db.session.commit()
 

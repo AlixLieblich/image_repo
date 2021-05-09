@@ -36,14 +36,6 @@ def load_user(user_id):
 
     return model.User.query.get(int(user_id))
 
-@app.route('/login')
-def show_login():
-    """Display login page."""
-
-    if current_user.is_authenticated:
-        return redirect('homepage.html')
-    else:
-        return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -153,11 +145,14 @@ def view_user_profile():
     user_id = current_user.user_id
     user_object = User.query.get(user_id)
     user_friends = user_object.added_friends
+    print("-----------------------------44--------------------")
+    # print(user_friends.user_friend_list_id)
     user_images = user_object.images
 
     return render_template('user_profile.html',
                             user_id=user_id,
                             user_object=user_object,
+                            user_friends=user_friends,
                             user_images=user_images)
 
 @app.route('/users')
@@ -189,14 +184,10 @@ def show_edit_profile_page():
     
     user_id = current_user.user_id
     user_object = User.query.get(user_id)
-    user_goals = Goal.query.filter(Goal.user_id == user_id).first()
-    trails = db.session.query(Trail)
 
     return render_template('profile_edit.html',
                             user_id=user_id,
-                            user_object=user_object,
-                            user_goals=user_goals,
-                            trails=trails)
+                            user_object=user_object)
 
 @app.route('/profile_edit', methods = ["POST"])
 def edit_user_profile():
@@ -209,9 +200,7 @@ def edit_user_profile():
     user_object = User.query.get(user_id)
    
     form_id = request.form.get("form_id")
-    print("-----------------------------")
-    print("trying someting dif")
-    print(form_id)
+
     #add image
     if form_id == "add_image":
         tag1 = request.form.get("tag1")
@@ -237,6 +226,22 @@ def edit_user_profile():
         image = crud.create_image(user_id, file_name, tag1, tag2, tag3)
 
         return redirect("user_profile")
+    #delete image
+    if form_id == "delete_image":
+        image_id = request.form.get("image_id")
+        Image.query.filter(Image.image_id==image_id).delete()
+        db.session.commit()
+
+        return redirect("user_profile")
+    #add image from gallery
+    if form_id == "add_from_gallery":
+        image_name = request.form.get("image_name")
+        tag1 = request.form.get("tag1")
+        tag2 = request.form.get("tag2")
+        tag3 = request.form.get("tag3")
+
+        crud.create_image(user_id, image_name, tag1, tag2, tag3)
+
 
     #basic form
     if form_id == "basic_profile_information":
@@ -268,11 +273,12 @@ def edit_user_profile():
             crud.set_user_profile_picture(user_id, file_name) 
         
         return redirect("user_profile")
+
     #edit friends
     elif form_id == "edit_friends":
         unfriend_id = request.form.get("friends")
-        friend = User.query.get(unfriend_id)
-        crud.update_friend_list(unfriend_id)
+        User_Friend.query.filter(User_Friend.user_friend_list_id==unfriend_id).delete()
+
         flash("Friend Removed")
 
         return redirect("user_profile")
@@ -289,7 +295,6 @@ def edit_user_profile():
         return redirect("user_profile")
 
     else:
-        flash("Unhandled form submission")
         return redirect("user_profile")
 
     return render_template('profile_edit.html',
