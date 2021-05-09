@@ -83,10 +83,11 @@ p {
 
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <ul class="navbar-nav ml-auto">
-
-        <form method="get" class="form-inline my-2 my-lg-0" action="/search_bar">
-          <input type="hidden" name="form_id" value="search"/>
-          <input name="search_query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        
+        <form method="GET" class="form-inline my-2 my-lg-0" action="/search_bar">
+          <input type="hidden" class="form-control mr-sm-2"  name="form_id" value="search"/>
+          <input type="hidden" class="form-control mr-sm-2"  name="search_query" value="search"/>
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
 
@@ -145,7 +146,10 @@ p {
         <div class="row">
           <div class="col-sm-12 col-md-6">
             <h6>About</h6>
-            <p class="text-justify">National Treasures is a student project developed for the Hackbright Academy Fullstack Software Engineering Bootcamp.</p>
+            <p class="text-justify">National Treasures is a image repository developed for the Shopify Fall 2021 Backend Developer Internship.
+              This project was developed by Alix Lieblich, while still a fellow of the Hackbright Academy Fullstack Software Engineering Bootcamp. Alix's features
+            chosen for the image repository are adding images to the repository via user profiles, deleting images via user profiles, and adding images
+          from the gallery to a user's own profile. Technologies used include Python, Javascript, HTML, CSS, Bootstrap, PostgreSQL, Flask, and Flask-Login.</p>
           </div>
 
           <div class="col-xs-6 col-md-3">
