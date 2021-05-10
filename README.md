@@ -178,3 +178,7 @@ class FlaskTestCase(TestCase):
         image = Image.query.filter(Image.tag1 == "Denali").first()
         self.assertEqual(image.tag1, "Denali")
 ```
+
+### To download this project:
+
+- Make sure to Git Clone the link, https://github.com/AlixLieblich/image_repo, and when you have it downloaded, you can use ```pip3 install -r requirements.txt``` to install the requirements. To run the page, run ```python3 server.py``` and open the page in your browser. Then, enjoy!
