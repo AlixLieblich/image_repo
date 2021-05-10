@@ -19,6 +19,7 @@ This project was developed by me, Alix Lieblich, while still a fellow of the Hac
 
 - Users are able to create accounts via the Sign Up page. By having users fill out a form with basic contact info, an account is created using Flask retrieval method ```request.form.get```. With user info collected, an account is finalized by using a function from crud.py which utilizes the PostgreSQL model in order to the user to the database.
 ```
+def create_user(username, password, user_fname, user_lname, email, profile_picture="/static/img/profile_pictures/default.png"):
     """Create and return a new user."""
 
     user = User(username=username, password=password, user_fname=user_fname, user_lname=user_lname, profile_picture=profile_picture, email=email)

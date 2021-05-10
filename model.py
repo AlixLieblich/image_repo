@@ -113,6 +113,21 @@ class Image(db.Model):
     def __repr__(self):
         return f'Image ID image_id={self.image_id}'
 
+def example_data():
+    """Create some sample data for use in test.py ."""
+
+    # In case this is run more than once, empty out existing data
+    User.query.delete()
+    Image.query.delete()
+
+    #create user with: username, password, first name, last name, email
+    user = User(username='photographer24', password='test', user_fname='Smokey', user_lname='Bear', email='hiker@gmail.com')
+    #create image with user id, image name, and three tags
+    image = Image(user_id=1, image_name='/static/img/images!/1.jpg', tag1='Denali', tag2='Nature', tag3='Pretty')
+
+    db.session.add_all([user, image])
+    db.session.commit()
+
 if __name__ == '__main__':
     from server import app
 

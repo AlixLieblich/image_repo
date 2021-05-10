@@ -16,6 +16,6 @@ flask-login==0.4.1
 pillow
 twilio
 selenium
-pytest
+pytest==3.10.1
 PostgreSQL
 

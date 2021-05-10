@@ -140,7 +140,7 @@ def view_user_profile():
 
     if not current_user.is_authenticated:
         flash('Please log in to view your account.')
-        return redirect('/login')
+        return redirect('/create-account')
 
     user_id = current_user.user_id
     user_object = User.query.get(user_id)
@@ -193,14 +193,31 @@ def show_edit_profile_page():
 def edit_user_profile():
     """Edit user profile with user form responses."""
 
+# if user is not logged in, redirect them to the login page
     if not current_user.is_authenticated:
-        return redirect('/login')
-
+        return redirect('/create-account')
+# collect the users id using Flask-Login function 'current_user'
     user_id = current_user.user_id
     user_object = User.query.get(user_id)
    
     form_id = request.form.get("form_id")
 
+    #add image from gallery
+    if form_id == "add_from_gallery":
+        image_name = request.form.get("image_name")
+        tag1 = request.form.get("tag1")
+        tag2 = request.form.get("tag2")
+        tag3 = request.form.get("tag3")
+
+        crud.create_image(user_id, image_name, tag1, tag2, tag3)
+
+    #delete image
+    if form_id == "delete_image":
+        image_id = request.form.get("image_id")
+        Image.query.filter(Image.image_id==image_id).delete()
+        db.session.commit()
+
+        return redirect("user_profile")
     #add image
     if form_id == "add_image":
         tag1 = request.form.get("tag1")
@@ -226,22 +243,6 @@ def edit_user_profile():
         image = crud.create_image(user_id, file_name, tag1, tag2, tag3)
 
         return redirect("user_profile")
-    #delete image
-    if form_id == "delete_image":
-        image_id = request.form.get("image_id")
-        Image.query.filter(Image.image_id==image_id).delete()
-        db.session.commit()
-
-        return redirect("user_profile")
-    #add image from gallery
-    if form_id == "add_from_gallery":
-        image_name = request.form.get("image_name")
-        tag1 = request.form.get("tag1")
-        tag2 = request.form.get("tag2")
-        tag3 = request.form.get("tag3")
-
-        crud.create_image(user_id, image_name, tag1, tag2, tag3)
-
 
     #basic form
     if form_id == "basic_profile_information":
