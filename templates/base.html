@@ -84,11 +84,9 @@ p {
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <ul class="navbar-nav ml-auto">
         
-        <form method="GET" class="form-inline my-2 my-lg-0" action="/search_bar">
-          <input type="hidden" class="form-control mr-sm-2"  name="form_id" value="search"/>
-          <input type="hidden" class="form-control mr-sm-2"  name="search_query" value="search"/>
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <form class="form-inline my-2 my-lg-0" action="/search_bar" method="POST">
+          <input class="form-control mr-sm-2"  type="text" name="search_query" id="search" placeholder="Search" aria-label="Search">
+          <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="Save" />
         </form>
 
         {% if current_user.is_authenticated %} 

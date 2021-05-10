@@ -64,33 +64,19 @@ def logout():
     return render_template('homepage.html')
 
 # SEARCH BAR
-@app.route('/search_bar')
+@app.route('/search_bar', methods = ["POST"])
 def search_bar():
     """Use navbar search bar."""
-    print("-------------------------------------------------")
 
-    print("howdy")
+    search_query = request.form.get('search_query')
 
-    form_id = request.form.get("form_id")
-    print('1 form id:')
-    print(form_id)
-    #add image
-    if form_id == "search":
-        print('form id:')
-        print(form_id)
-    
-        search_query = request.form.get('search_query')
-        print("--------------------------------")
-        print('search query:')
-        print(search_query)
-
-        search_query = db.session.query(Image).filter(Image.tag1==search_query).all()
+    search_query = db.session.query(Image).filter(Image.tag1==search_query).all()
+    if search_query == None:
+        print('1')
+        search_query = db.session.query(Image).filter(Image.tag2==(search_query)).all()
         if search_query == None:
-            print('1')
-            search_query = db.session.query(Image).filter(Image.tag2==(search_query)).all()
-            if search_query == None:
-                print('2')
-                search_query = db.session.query(Image).filter(Image.tag3==(search_query)).all()
+            print('2')
+            search_query = db.session.query(Image).filter(Image.tag3==(search_query)).all()
     
     return render_template('show-form.html',
                             search_query=search_query)
@@ -213,11 +199,14 @@ def edit_user_profile():
 
     #delete image
     if form_id == "delete_image":
-        image_id = request.form.get("image_id")
-        Image.query.filter(Image.image_id==image_id).delete()
-        db.session.commit()
+        # for security, ensure that the user deleting the image is the logged in user
+        if current_user.user_id == user_id:
+            image_id = request.form.get("image_id")
+            Image.query.filter(Image.image_id==image_id).delete()
+            db.session.commit()
 
         return redirect("user_profile")
+
     #add image
     if form_id == "add_image":
         tag1 = request.form.get("tag1")

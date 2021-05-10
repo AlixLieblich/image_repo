@@ -347,7 +347,7 @@ a {
           <ul class="list-group list-group-flush">
             {% for image in images %}
 <!--View imgae  -->
-                <img src="/static/img/images!/{{ image.image_name }}"  width="700" height="500">
+                <img src="/static/img/images!/{{ image.image_name }}"  width="600" height="400">
                 <p class="card-text">#{{ image.tag1 }} #{{ image.tag2 }} #{{ image.tag3 }}</p>
 <!-- Add image to your profile -->
                 <form method="post" action="profile_edit">
@@ -383,54 +383,6 @@ a {
       });
     });
     </script>
-
-
-
-
-
-
-<!-- </head>
-<body>
-  
-
-
-<main role="main">
-
-<section class="jumbotron text-center">
-  <div class="container">
-    <h1>Album example</h1>
-    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-    <p>
-      <a href="#" class="btn btn-primary my-2">Main call to action</a>
-      <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-    </p>
-  </div>
-</section>
-
-
-{% for image in images %}
-    <div class="album py-5 bg-light">
-        <div class="container">
-
-        <div class="row">
-            <div class="col-8">
-            <div class="card mb-4 shadow-sm">
-                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
-                <!-- <img src="/static/img/images!/{{ image.image_name }}"  width="225" height="225">
-                <div class="card-body">
-                <p class="card-text">#{{ image.tag1 }} #{{ image.tag2 }} #{{ image.tag3 }}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                </div>
-                </div>
-            </div>
-            </div>
-      {% endfor %}
-</main> --> -->
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>

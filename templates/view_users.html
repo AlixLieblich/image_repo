@@ -413,11 +413,41 @@ button.createbtn i {
 
     <div class="navigation">
       <ul>
-        <li onclick="tabs(0)" class="user-setting">Friends</li>
+        <li onclick="tabs(0)" class="user-setting">Images</li>
+        <li onclick="tabs(1)" class="user-setting">Friends</li>
+
 
       </ul>
     </div>
-   
+
+      <div class="tabs">
+      </div>
+      <h4>{{ user_object.user_fname }}'s Images</h4>
+
+      <div class="tabs-content">
+        <div id="signup-tab-content" class="active">
+  
+          <ul class="list-group list-group-flush">
+            {% for image in user_object.images %}
+            
+                <img src="/static/img/images!/{{ image.image_name }}"  width="700" height="500">
+                <p class="card-text">#{{ image.tag1 }} #{{ image.tag2 }} #{{ image.tag3 }}</p>
+                
+                <form method="post" action="/profile_edit">
+                  <input type="hidden" name="form_id" value="delete_image"/>
+                  <input type="hidden" name="image_id" value="{{ image.image_id }}"/>
+                </form>
+
+            {% endfor %}
+          </ul>
+  
+         
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        
       <div class="profile-reviews tab">
 
         <h4>Your Friends</h4>

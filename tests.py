@@ -4,14 +4,6 @@ import crud
 from model import User, Image, connect_to_db, db, example_data
 import os 
 
-# def test_data():
-#     """Make test data for teting."""
-
-#     #create user with: username, password, first name, last name, email
-#     user = crud.create_user('photographer24', 'test', 'Smokey', 'Bear', 'hiker@gmail.com')
-#     #create image with user id, image name, and three tags
-#     image=crud.create_image(1, '', 'Denali', 'Nature', 'Pretty')
-
 class FlaskTestCase(TestCase):
     def setUp(self):
         """Routine before test starts."""
