@@ -72,10 +72,8 @@ def search_bar():
 
     search_query = db.session.query(Image).filter(Image.tag1==search_query).all()
     if search_query == None:
-        print('1')
         search_query = db.session.query(Image).filter(Image.tag2==(search_query)).all()
         if search_query == None:
-            print('2')
             search_query = db.session.query(Image).filter(Image.tag3==(search_query)).all()
     
     return render_template('show-form.html',
@@ -131,8 +129,6 @@ def view_user_profile():
     user_id = current_user.user_id
     user_object = User.query.get(user_id)
     user_friends = user_object.added_friends
-    print("-----------------------------44--------------------")
-    # print(user_friends.user_friend_list_id)
     user_images = user_object.images
 
     return render_template('user_profile.html',
