@@ -1,4 +1,4 @@
-"""Models for trail locating app."""
+"""Models for image repo app."""
 
 from flask_sqlalchemy import SQLAlchemy
 
